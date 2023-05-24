@@ -23,3 +23,6 @@
 
 - Deberá ejecutarse por consola y se almacenarán los datos en memoria.
 </p>
+
+<h4>Diagrama entidad relacion</h4>
+![Diagrama-entidad-relacion.png](Diagrama-entidad-relacion.png)
