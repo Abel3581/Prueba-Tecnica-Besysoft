@@ -25,4 +25,4 @@
 </p>
 
 <h4>Diagrama entidad relacion</h4>
-![Diagrama-entidad-relacion.png](Diagrama-entidad-relacion.png)
+![Diagrama-entidad-relacion.png](src%2FDiagrama-entidad-relacion.png)
