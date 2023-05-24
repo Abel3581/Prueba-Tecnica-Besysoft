@@ -25,4 +25,4 @@
 </p>
 
 <h4>Diagrama entidad relacion</h4>
-![Diagrama-entidad-relacion.png](src%2FDiagrama-entidad-relacion.png)
+[![Diagrama-entidad-relacion.png](src%2FDiagrama-entidad-relacion.png)](https://github.com/Abel3581/Prueba-Tecnica-Besysoft/blob/main/src/Diagrama-entidad-relacion.png)
