@@ -1,8 +1,10 @@
 package test;
 
+import Model.Producto;
 import Model.Vendedor;
 import exception.CodigoInvalidoException;
 import exception.PrecioInvalidoException;
+import exception.ProductoExistenteException;
 import exception.VendedorExistenteException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -41,5 +43,16 @@ class TiendaTest {
         Assertions.assertThrows(VendedorExistenteException.class, () -> {
             tienda.agregarVendedor(vendedor);
         });
+    }
+
+    @Test
+    public void agregarProducto() throws CodigoInvalidoException, PrecioInvalidoException, ProductoExistenteException {
+        Producto producto = new Producto("p1", "Producto1", 2000.0, "cat1");
+        tienda.agregarProducto(producto);
+
+        HashMap<String, Producto> productos = tienda.getProductos();
+        Assertions.assertTrue(productos.containsKey("p1"));
+        Assertions.assertEquals(producto, productos.get("p1"));
+
     }
 }
