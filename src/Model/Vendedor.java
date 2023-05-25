@@ -21,7 +21,7 @@ public class Vendedor {
         this.codigo = codigo;
         this.nombre = nombre;
         this.sueldo = sueldo;
-        this.ventas = new ArrayList<>();
+        this.ventas = ventas;
         validarCodigo(codigo);
         validarSueldo(sueldo);
     }
