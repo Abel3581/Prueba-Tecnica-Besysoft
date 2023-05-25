@@ -9,7 +9,7 @@ import exception.*;
 
 public class Main {
     public static void main(String[] args) throws CodigoInvalidoException, PrecioInvalidoException,
-            VendedorExistenteException, ProductoExistenteException {
+            VendedorExistenteException, ProductoExistenteException, RegistroNoEncontradoException {
 
         System.out.println("\n########### Tienda de Productos ###########\n");
 

@@ -128,6 +128,13 @@ public class Tienda {
         producto.setPrecio(p);
     }
 
+    public double gananciasVendedor(String codigoVendedor) throws RegistroNoEncontradoException {
+        Vendedor vendedor = vendedores.get(codigoVendedor);
+        validarVendedor(vendedor);
+        double gananciasTotales = vendedor.getSueldo() + calcularComision(vendedor);
+        return gananciasTotales;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Tienda{");

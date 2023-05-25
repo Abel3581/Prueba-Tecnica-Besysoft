@@ -19,7 +19,7 @@ public class Menu {
         this.scanner = new Scanner(System.in);
     }
 
-    public void mostrarMenu() throws CodigoInvalidoException, PrecioInvalidoException {
+    public void mostrarMenu() throws CodigoInvalidoException, PrecioInvalidoException, RegistroNoEncontradoException {
         int opcion;
         do {
             imprimirMenu();
@@ -57,6 +57,9 @@ public class Menu {
                     eliminarVendedor();
                     break;
                 case 11:
+                    gananciasTotalPorMes();
+                    break;
+                case 12:
                     System.out.println("\nSaliendo...");
                     break;
                 default:
@@ -64,9 +67,21 @@ public class Menu {
             }
 
             System.out.println();
-        } while (opcion != 11);
+        } while (opcion != 12);
 
         scanner.close();
+    }
+
+    private void gananciasTotalPorMes() throws RegistroNoEncontradoException {
+        System.out.println("=== Calcula Ganancia Vendedor ===");
+        System.out.print("Ingrese el código del vendedor: ");
+        String codVend = scanner.nextLine();
+        try{
+            double ganancias = tienda.gananciasVendedor(codVend);
+            System.out.println("\nGanancias por mes: " + ganancias);
+        }catch (RegistroNoEncontradoException e){
+            System.out.println("\nError: " + e.getMessage() + " (" + e.getTipoRegistro() + ")");
+        }
     }
 
     private void eliminarVendedor() {
@@ -200,7 +215,8 @@ public class Menu {
         sb.append(String.format("| %-2s | %-35s |\n", "8.", "Actualizar producto"));
         sb.append(String.format("| %-2s | %-35s |\n", "9.", "Informacion del vendedor"));
         sb.append(String.format("| %-2s | %-34s |\n", "10.", "Eliminar Vendedor"));
-        sb.append(String.format("| %-2s | %-34s |\n", "11.", "Salir"));
+        sb.append(String.format("| %-2s | %-34s |\n", "11.", "Ver Ganancias vendedor"));
+        sb.append(String.format("| %-2s | %-34s |\n", "12.", "Salir"));
         sb.append("+------------------------------------------+");
         System.out.println(sb.toString());
     }
