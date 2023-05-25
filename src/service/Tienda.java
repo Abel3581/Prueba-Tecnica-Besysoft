@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 public class Tienda {
 
+    //Se usa HashMap son mas eficientes que la List
     private HashMap<String, Vendedor> vendedores;
     private HashMap<String, Producto> productos;
 
@@ -82,7 +83,12 @@ public class Tienda {
         productos.remove(codigo);
 
     }
-  
+
+    public void eliminarVendedor(String codigo) throws RegistroNoEncontradoException {
+        Vendedor vendedor = vendedores.get(codigo);
+        validarVendedor(vendedor);
+        vendedores.remove(codigo);
+    }
 
     public double calcularComision(Vendedor vendedor) {
         double totalVentas = vendedor.getVentas()
@@ -137,4 +143,6 @@ public class Tienda {
         validarVendedor(vendedor);
         return vendedor;
     }
+
+
 }

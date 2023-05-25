@@ -25,4 +25,6 @@
 </p>
 
 <h4>Diagrama entidad relacion</h4>
-https://github.com/Abel3581/Prueba-Tecnica-Besysoft/blob/main/src/Diagrama-entidad-relacion.png)
+
+![UMLBESYSOFT.png](src%2Fuml%2FUMLBESYSOFT.png)
+
