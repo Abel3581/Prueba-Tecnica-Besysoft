@@ -9,12 +9,16 @@ import org.junit.jupiter.api.Test;
 import service.Tienda;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TiendaTest {
 
     private Tienda tienda;
+
+    TiendaTest() {
+    }
 
     @BeforeEach
     void setUp() {
@@ -73,4 +77,70 @@ class TiendaTest {
         Assertions.assertTrue(vendedor.getVentas().contains(producto));
     }
 
+    @Test
+    public void eliminarVentaProductoYVendedorExistente() throws CodigoInvalidoException, PrecioInvalidoException, VendedorExistenteException, ProductoExistenteException, RegistroNoEncontradoException {
+        Vendedor vendedor = new Vendedor("v1", "Nombre", 200.00);
+        tienda.agregarVendedor(vendedor);
+        Producto producto = new Producto("p1", "Nombre", 20.00, "cate");
+        tienda.agregarProducto(producto);
+
+        tienda.registrarVenta(producto, vendedor);
+        tienda.eliminarVenta(producto, vendedor);
+
+        Assertions.assertFalse(vendedor.getVentas().contains(producto));
+    }
+
+    @Test
+    public void eliminarProductoProductoExistente() throws CodigoInvalidoException, PrecioInvalidoException, ProductoExistenteException, RegistroNoEncontradoException {
+        Producto producto = new Producto("p1", "Camiseta", 29.99, "Ropa");
+        tienda.agregarProducto(producto);
+
+        tienda.eliminarProducto("p1");
+
+        HashMap<String, Producto> productos = tienda.getProductos();
+        Assertions.assertFalse(productos.containsKey("p1"));
+    }
+
+    @Test
+    public void eliminarVendedorVendedorExistente() throws CodigoInvalidoException, PrecioInvalidoException, VendedorExistenteException, RegistroNoEncontradoException {
+        Vendedor vendedor = new Vendedor("001", "John Doe", 1000.0);
+        tienda.agregarVendedor(vendedor);
+
+        tienda.eliminarVendedor("001");
+        HashMap<String, Vendedor> vendedores = tienda.getVendedores();
+
+        Assertions.assertFalse(vendedores.containsKey("001"));
+    }
+
+    @Test
+    void calcularComisionCantidadVentasMenorIgualA2CalculaComisionCorrectamente() throws CodigoInvalidoException, PrecioInvalidoException {
+        Vendedor vendedor = new Vendedor("v1", "John Doe", 1000.0);
+        Producto producto1 = new Producto("p1", "Camiseta", 29.99, "Ropa");
+        Producto producto2 = new Producto("p2", "Pantalón", 39.99, "Ropa");
+
+        tienda.getVendedores().put("v1", vendedor);
+        vendedor.agregarVenta(producto1);
+        vendedor.agregarVenta(producto2);
+
+        double comision = tienda.calcularComision(vendedor);
+
+        Assertions.assertEquals(3.4989999999999997, comision);
+
+    }
+
+    @Test
+    void buscarPorCategoriaProductosConCategoriaExistenteDevuelveProductosCorrectos() throws ProductoExistenteException, CodigoInvalidoException, PrecioInvalidoException {
+        Producto producto1 = new Producto("P001", "Camiseta", 29.99, "Ropa");
+        Producto producto2 = new Producto("P002", "Pantalón", 39.99, "Ropa");
+        Producto producto3 = new Producto("P003", "Zapatos", 59.99, "Calzado");
+        tienda.agregarProducto(producto1);
+        tienda.agregarProducto(producto2);
+        tienda.agregarProducto(producto3);
+
+        List<Producto> productos = tienda.buscarPorCategoria("Ropa");
+
+        Assertions.assertEquals(2, productos.size());
+        Assertions.assertTrue(productos.contains(producto1));
+        Assertions.assertTrue(productos.contains(producto2));
+    }
 }
