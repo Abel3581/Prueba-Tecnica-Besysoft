@@ -55,4 +55,14 @@ class TiendaTest {
         Assertions.assertEquals(producto, productos.get("p1"));
 
     }
+
+    @Test
+    public void agregarProductoProductoExistenteLanzaExcepcion() throws CodigoInvalidoException, PrecioInvalidoException {
+        Producto producto = new Producto("p1", "Producto1", 2000.0, "cat1");
+        tienda.getProductos().put("p1", producto);
+        Assertions.assertThrows(ProductoExistenteException.class, () -> {
+            tienda.agregarProducto(producto);
+        });
+    }
+
 }
