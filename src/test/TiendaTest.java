@@ -2,10 +2,7 @@ package test;
 
 import Model.Producto;
 import Model.Vendedor;
-import exception.CodigoInvalidoException;
-import exception.PrecioInvalidoException;
-import exception.ProductoExistenteException;
-import exception.VendedorExistenteException;
+import exception.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,6 +60,17 @@ class TiendaTest {
         Assertions.assertThrows(ProductoExistenteException.class, () -> {
             tienda.agregarProducto(producto);
         });
+    }
+
+    @Test
+    public void registrarVentaProductoYVendedorExistente() throws CodigoInvalidoException, PrecioInvalidoException, VendedorExistenteException, ProductoExistenteException, RegistroNoEncontradoException {
+        Vendedor vendedor = new Vendedor("v1", "Nombre", 200.00);
+        tienda.agregarVendedor(vendedor);
+        Producto producto = new Producto("p1", "Nombre", 20.00, "cate");
+        tienda.agregarProducto(producto);
+
+        tienda.registrarVenta(producto, vendedor);
+        Assertions.assertTrue(vendedor.getVentas().contains(producto));
     }
 
 }
