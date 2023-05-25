@@ -73,4 +73,17 @@ class TiendaTest {
         Assertions.assertTrue(vendedor.getVentas().contains(producto));
     }
 
+    @Test
+    public void eliminarVentaProductoYVendedorExistente() throws CodigoInvalidoException, PrecioInvalidoException, VendedorExistenteException, ProductoExistenteException, RegistroNoEncontradoException {
+        Vendedor vendedor = new Vendedor("v1", "Nombre", 200.00);
+        tienda.agregarVendedor(vendedor);
+        Producto producto = new Producto("p1", "Nombre", 20.00, "cate");
+        tienda.agregarProducto(producto);
+
+        tienda.registrarVenta(producto, vendedor);
+        tienda.eliminarVenta(producto, vendedor);
+
+        Assertions.assertFalse(vendedor.getVentas().contains(producto));
+    }
+
 }
