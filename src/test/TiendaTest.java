@@ -159,4 +159,17 @@ class TiendaTest {
         Assertions.assertTrue(productos.contains(producto3));
 
     }
+
+    @Test
+    void actualizarProductoProductoExistente() throws RegistroNoEncontradoException, ProductoExistenteException, CodigoInvalidoException, PrecioInvalidoException {
+        Producto producto = new Producto("P001", "Camiseta", 29.99, "Ropa");
+        tienda.agregarProducto(producto);
+
+        tienda.actualizarProducto("P001", "Nueva Camiseta", 39.99, "Ropa Nueva");
+
+        Producto productoActualizado = tienda.getProductos().get("P001");
+        Assertions.assertEquals("Nueva Camiseta", productoActualizado.getNombre());
+        Assertions.assertEquals(39.99, productoActualizado.getPrecio());
+        Assertions.assertEquals("Ropa Nueva", productoActualizado.getCategoria());
+    }
 }
