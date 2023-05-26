@@ -1,9 +1,9 @@
 package vista;
 
-import Model.Producto;
+import model.Producto;
 import service.Menu;
 import service.Tienda;
-import Model.Vendedor;
+import model.Vendedor;
 import exception.*;
 
 

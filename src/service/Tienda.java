@@ -1,7 +1,7 @@
 package service;
 
-import Model.Producto;
-import Model.Vendedor;
+import model.Producto;
+import model.Vendedor;
 import exception.ProductoExistenteException;
 import exception.RegistroNoEncontradoException;
 import exception.VendedorExistenteException;

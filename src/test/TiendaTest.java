@@ -1,7 +1,7 @@
 package test;
 
-import Model.Producto;
-import Model.Vendedor;
+import model.Producto;
+import model.Vendedor;
 import exception.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,8 +10,6 @@ import service.Tienda;
 
 import java.util.HashMap;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TiendaTest {
 
@@ -133,6 +131,7 @@ class TiendaTest {
         Producto producto1 = new Producto("P001", "Camiseta", 29.99, "Ropa");
         Producto producto2 = new Producto("P002", "Pantalón", 39.99, "Ropa");
         Producto producto3 = new Producto("P003", "Zapatos", 59.99, "Calzado");
+
         tienda.agregarProducto(producto1);
         tienda.agregarProducto(producto2);
         tienda.agregarProducto(producto3);
@@ -142,5 +141,22 @@ class TiendaTest {
         Assertions.assertEquals(2, productos.size());
         Assertions.assertTrue(productos.contains(producto1));
         Assertions.assertTrue(productos.contains(producto2));
+    }
+
+    @Test
+    public void buscarPorAtributoDeProducto() throws CodigoInvalidoException, PrecioInvalidoException, ProductoExistenteException {
+        Producto producto1 = new Producto("P001", "Camiseta", 29.99, "Ropa");
+        Producto producto2 = new Producto("P002", "Pantalón", 39.99, "Ropa");
+        Producto producto3 = new Producto("P003", "Zapatos", 59.99, "Calzado");
+
+        tienda.agregarProducto(producto1);
+        tienda.agregarProducto(producto2);
+        tienda.agregarProducto(producto3);
+
+        List<Producto> productos = tienda.buscarPorAtributo("P003");
+
+        Assertions.assertEquals(1, productos.size());
+        Assertions.assertTrue(productos.contains(producto3));
+
     }
 }
