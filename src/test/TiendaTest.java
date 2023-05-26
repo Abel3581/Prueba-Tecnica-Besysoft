@@ -172,4 +172,40 @@ class TiendaTest {
         Assertions.assertEquals(39.99, productoActualizado.getPrecio());
         Assertions.assertEquals("Ropa Nueva", productoActualizado.getCategoria());
     }
+
+    @Test
+    void gananciasVendedorVendedorExistente() throws RegistroNoEncontradoException, VendedorExistenteException, CodigoInvalidoException, PrecioInvalidoException {
+        Vendedor vendedor = new Vendedor("001", "John Doe", 1000.0);
+        Producto producto1 = new Producto("P001", "Camiseta", 29.99, "Ropa");
+        Producto producto2 = new Producto("P002", "Pantalón", 39.99, "Ropa");
+        tienda.getVendedores().put("001", vendedor);
+        vendedor.agregarVenta(producto1);
+        vendedor.agregarVenta(producto2);
+
+        double ganancias = tienda.gananciasVendedor("001");
+
+        Assertions.assertEquals(1003.499, ganancias);
+    }
+
+    @Test
+    public void buscarPorVendedorVendedorExistente() throws CodigoInvalidoException, PrecioInvalidoException, VendedorExistenteException, RegistroNoEncontradoException {
+        Vendedor vendedor = new Vendedor("v1", "Nombre", 1000.0);
+        tienda.agregarVendedor(vendedor);
+
+        HashMap<String, Vendedor> vendedors = tienda.getVendedores();
+        Vendedor vendedorEncontrado = tienda.buscarVendedor("v1");
+
+        Assertions.assertEquals(vendedor, vendedorEncontrado);
+
+    }
+
+    @Test
+    void buscarVendedorVendedorNoExistenteLanzaExcepcionRegistroNoEncontrado() {
+        String codigoVendedor = "002";
+
+        Assertions.assertThrows(RegistroNoEncontradoException.class, () -> {
+            tienda.buscarVendedor(codigoVendedor);
+        });
+    }
+
 }
